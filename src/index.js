@@ -1,4 +1,6 @@
 const axios = require('axios').default;
+import PicturesApiService from './on-search';
+import Notiflix from 'notiflix';
 
 
 // const MY_URL = `https://pixabay.com/api/?key=31092155-fdd6914219543248b658a821f&q=${onText}&image_type=photo`
@@ -6,52 +8,51 @@ refs = {
     findImg: document.querySelector('#search-form'),
     gallery: document.querySelector('.gallery'),
     submitBtn: document.querySelector('button[type=submit]'),
+    loadMore: document.querySelector('.load-more')
 
 }
 
+const picturesApiService = new PicturesApiService();
+
 refs.findImg.addEventListener('submit', onSubmit)
+refs.loadMore.addEventListener('click', onLoadMore)
+
 
 function onSubmit(event) {
 
     event.preventDefault();
 
-    const form = event.currentTarget;
-    const query = form.elements.searchQuery.value;
+    // const form = event.currentTarget;
+    picturesApiService.searchQuery = event.currentTarget.elements.searchQuery.value.trim();
 
-     if (!query) {
-        refs.gallery.innerHTML = '';
+     if (!picturesApiService.searchQuery) {
+         refs.gallery.innerHTML = '';
+         Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
     return;  
     }
-  
-    onSearchByName(query)
-    .then(renderPictures)
-    .catch(error => {
-    console.log(error);
+    picturesApiService.resetPage()
+    
+    picturesApiService.onSearchByName()
+        .then(hits => {
+            clearPage();
+            renderPictures(hits)
+        })
+        .catch(error => {
+        console.log(error);
+        
 })
 
 }
 
 
-function onSearchByName(searchByName) {
-
-   return fetch(`https://pixabay.com/api/?key=31092155-fdd6914219543248b658a821f&q=${searchByName}&image_type=photo&orientation=horizontal&safesearch=true`)
-        .then(res => {
-            return res.json();
-    })
-
-}
-
 function renderPictures(pictures) {
-    // refs.findImg.value = '';
+   
      
-           const picture = Object.values(pictures.hits)
-    console.log(picture);
-  
-     const markup = picture
+     const markup = pictures
       .map(({webformatURL, tags, likes, views, comments, downloads}) => {
          
      return `<div class="photo-card">
-            <img src="${webformatURL}" alt="${tags}" width="360" height="240" loding="lazy" />
+            <img src="${webformatURL}" alt="${tags}" width="360" height="240" loading="lazy" />
             <div class="info">
             <p class="info-item"> likes:
             <b> ${likes}</b>
@@ -71,17 +72,27 @@ function renderPictures(pictures) {
     })
         .join("");
     
-    // console.log(markup);
-  refs.gallery.innerHTML = markup;
+   
+  refs.gallery.insertAdjacentHTML('beforeend' , markup)
     
     
 }
 
 
+function onLoadMore() {
+    picturesApiService.onSearchByName()
+        .then(renderPictures)
+        
+    
+}
+
+function clearPage() {
+   refs.gallery.innerHTML = ''
+}
 
 //  }
 
-// console.log(onSearchByName('cat'));
+
 
 // async function getUser() {
 //   try {
