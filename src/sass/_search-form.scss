@@ -1,0 +1,35 @@
+.search-form {
+
+    background-color: blue;
+    padding: 40px 0 40px 800px;
+    
+
+}
+
+input { 
+
+    border-radius: 5px;
+    border-style: none;
+
+    // border: 1px solid blue;
+
+    width: 250px;
+    height: 40px;
+
+    outline: transparent;
+}
+
+
+button { 
+        width: 100px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+            background: #f28110;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.88;
+            letter-spacing: .06em;
+            cursor: pointer;
+}
