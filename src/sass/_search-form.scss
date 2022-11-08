@@ -35,7 +35,15 @@ button {
 }
 
 .load-more { 
+
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
