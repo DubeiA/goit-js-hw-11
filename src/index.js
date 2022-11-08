@@ -82,7 +82,7 @@ function renderPictures(pictures) {
     
     return;
     }
-    timer()
+    // timer()
            
     Notiflix.Notify.success(`Hooray! We found ${pictures.data.totalHits} images.`);
 
