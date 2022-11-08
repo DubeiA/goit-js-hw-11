@@ -82,7 +82,7 @@ function renderPictures(pictures) {
     
     return;
     }
-    // timer()
+    timer()
            
     Notiflix.Notify.success(`Hooray! We found ${pictures.data.totalHits} images.`);
 
@@ -137,7 +137,7 @@ function clearPage() {
 
 
 function timer() {
-     timerId = setTimeout(() => {
+    const timerId = setTimeout(() => {
          
      hidden.classList.remove('is-hidden')
   }, 1000);
