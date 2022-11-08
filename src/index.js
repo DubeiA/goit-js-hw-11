@@ -6,7 +6,7 @@ import Notiflix from 'notiflix';
 // const picturesApiService = new PicturesApiService();
 
 // Силки
-refs = { 
+const refs = { 
     findImg: document.querySelector('#search-form'),
     gallery: document.querySelector('.gallery'),
     submitBtn: document.querySelector('button[type=submit]'),
