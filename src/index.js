@@ -36,8 +36,8 @@ function onSubmit(event) {
 
     searchQuery = event.currentTarget.elements.searchQuery.value.trim();
 
-     if (!searchQuery && searchQuery === "") {
-        //  refs.gallery.innerHTML = '';
+     if (!searchQuery) {
+         refs.gallery.innerHTML = '';
          hidden.classList.add('is-hidden')
          Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
     return;  
@@ -46,7 +46,7 @@ function onSubmit(event) {
 
     resetPage()
     
-   
+     hidden.classList.remove('is-hidden')
     
         onSearchByName()
         .then(pictures => {
@@ -124,9 +124,7 @@ function onLoadMore() {
     hidden.classList.add('is-hidden')
     onSearchByName()
         .then(renderPictures)
-    
-   
-        
+       
     
 }
 
