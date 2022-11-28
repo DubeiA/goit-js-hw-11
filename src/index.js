@@ -62,8 +62,8 @@ function onSubmit(event) {
     // Функція для спілкування з бекендом
 async function onSearchByName() {
   try {
-    const response = await axios.get(`https://pixabay.com/api/?key=31092155-fdd6914219543248b658a821f&q=${searchQuery}
-   &image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`);
+    const response = await axios.get(`https://pixabay.com/api/?key=31092155-fdd6914219543248b658a821f&q=
+    ${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`);
     //   console.log(response);
       return response
   } catch (error) {
